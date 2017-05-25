@@ -13,10 +13,10 @@ var tracks = null;
 var buflen = 1024;
 var buf = new Float32Array(buflen);
 
-// default sensivity is 2hz, checking 10times with 10ms interval
-var inputSens = 2;
-var inputRep = 10;
-var inputInter = 10;
+// default sensivity is 5hz, checking 5times with 1ms interval
+var inputSens = 5;
+var inputRep = 5;
+var inputInter = 1;
 var inputMin = 90;
 var inputMax = 255;
 
@@ -25,6 +25,7 @@ var MIN_SAMPLES = 0; // will be initialized when AudioContext is created.
 window.onload = function() {
 
   audioContext = new AudioContext();
+
 
   //why 5khz? will learn
   MAX_SIZE = Math.max(4, Math.floor(audioContext.sampleRate / 5000));
@@ -210,7 +211,6 @@ function validatePitch(confidenceIntervalForPitch, repeatTimes, sensivityMillise
 
 
 function updatePitch(time) {
-  //console.log("Updatepitch runs like a machine");
   analyser.getFloatTimeDomainData(buf);
   var ac = autoCorrelate(buf, audioContext.sampleRate);
 
@@ -224,21 +224,26 @@ function updatePitch(time) {
     inputMin = document.getElementById("inputMin").value;
   if (document.getElementById("inputMax") !== null)
     inputMax = document.getElementById("inputMax").value;
+    var o = document.getElementById("outputPitch");
 
-  if (ac == -1) {} else {
+
+  if (ac != -1) {
 
     validatePitch(inputSens, inputRep, inputInter,
       function(pitch) {
-        var o = document.getElementById("outputPitch");
         if (pitch > inputMin && pitch < inputMax) {
           o.innerHTML = pitch;
           //now output might be correctly filtered from harmonics
+
         }
       }
     );
   }
 
+
+
   if (!window.requestAnimationFrame)
     window.requestAnimationFrame = window.webkitRequestAnimationFrame;
   rafID = window.requestAnimationFrame(updatePitch);
+
 }
