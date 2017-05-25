@@ -8,7 +8,7 @@
 3) Get fundamental pitch information from <span id="outputPitch"></span>
 ```
 
-#Example Usage: 
+# Example Usage: 
 
 <script src="PitchDetectionLibrary.js"></script>
 <span id="outputPitch"></span>
@@ -16,11 +16,12 @@
 toggleLiveInput();
 </script>
 
-#Get via JS
+# Get via JS
 
 var o = document.getElementById("outputPitch")
 var pitch = o.innerHTML;
 
+# Running
 
 http://localhost:3000
 
