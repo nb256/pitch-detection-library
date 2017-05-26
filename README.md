@@ -10,16 +10,20 @@
 
 # Example Usage: 
 
+```
 <script src="PitchDetectionLibrary.js"></script>
 <span id="outputPitch"></span>
 <script>
 toggleLiveInput();
 </script>
+```
 
 # Get via JS
 
-var o = document.getElementById("outputPitch")
+```
+var o = document.getElementById("outputPitch");
 var pitch = o.innerHTML;
+```
 
 # Running
 
